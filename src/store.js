@@ -41,6 +41,14 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
+    },
+    async deleteCar({ dispatch }, payload) {
+      try {
+        let res = await api.delete(`/cars/` + payload)
+        dispatch('getCars')
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 })
