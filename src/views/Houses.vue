@@ -1,17 +1,29 @@
 <template>
-  <div class="houses">This is a thing</div>
+  <div class="houses container-fluid text-light">
+    <div class="row d-flex justify-content-center">
+      <JustHouse v-for="house in houses" :houseProp="house" :key="house._id" />
+    </div>
+  </div>
 </template>
 
 
 <script>
+import JustHouse from "../components/JustHouse.vue";
 export default {
   name: "houses",
   data() {
     return {};
   },
-  computed: {},
+  mounted() {
+    this.$store.dispatch("getHouses");
+  },
+  computed: {
+    houses() {
+      return this.$store.state.houses;
+    }
+  },
   methods: {},
-  components: {}
+  components: { JustHouse }
 };
 </script>
 

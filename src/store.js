@@ -14,7 +14,9 @@ export default new Vuex.Store({
     cars: [],
     currentCar: {},
     jobs: [],
-    currentJob: {}
+    currentJob: {},
+    houses: [],
+    currentHouse: {}
   },
   mutations: {
     setCars(state, payload) {
@@ -28,6 +30,12 @@ export default new Vuex.Store({
     },
     setCurrentJob(state, payload) {
       state.currentJob = payload
+    },
+    setHouses(state, payload) {
+      state.houses = payload
+    },
+    setCurrentHouse(state, payload) {
+      state.currentHouse = payload
     }
   },
   actions: {
@@ -89,6 +97,39 @@ export default new Vuex.Store({
         let res = await api.delete(`/jobs/` + payload)
         dispatch('getJobs')
         router.push({ name: 'jobs' })
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getHouses({ commit, dispatch }) {
+      try {
+        let res = await api.get('houses')
+        commit('setHouses', res.data.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getHouseById({ commit, dispatch }, payload) {
+      try {
+        let res = await api.get(`/houses/${payload.HouseId}`)
+        commit('setCurrentHouse', res.data.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async makeHouse({ dispatch }, payload) {
+      try {
+        let res = await api.post(`/houses`, payload)
+        dispatch('getHouses')
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteHouse({ dispatch }, payload) {
+      try {
+        let res = await api.delete(`/houses/` + payload)
+        dispatch('getHouses')
+        router.push({ name: 'Houses' })
       } catch (error) {
         console.error(error)
       }
