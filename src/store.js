@@ -33,6 +33,14 @@ export default new Vuex.Store({
     async getCarById({ commit, dispatch }, payload) {
       let res = await api.get(`/cars/${payload.carId}`)
       commit('setCurrentCar', res.data.data)
+    },
+    async makeCar({ dispatch }, payload) {
+      try {
+        let res = await api.post(`/cars`, payload)
+        dispatch('getCars')
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 })
