@@ -36,6 +36,13 @@ export default new Router({
       }
     },
     {
+      path: '/jobs/:id',
+      name: 'justjob',
+      component: function () {
+        return import('./views/OneJob.vue')
+      }
+    },
+    {
       path: '*',
       redirect: '/cars'
     }

@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="text-light">
+    <img alt="Vue logo" src="./assets/logo.png" height="50px" />
     <div id="nav">
       <router-link to="/">Cars</router-link>|
       <router-link to="/houses">Houses</router-link>|
       <router-link to="/jobs">Jobs</router-link>
     </div>
-    <img alt="Vue logo" src="./assets/logo.png" height="50px" />
     <router-view />
   </div>
 </template>
